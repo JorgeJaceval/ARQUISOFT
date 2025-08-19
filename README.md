@@ -13,5 +13,5 @@ Promtail lee los archivos de manera local en la carpeta fastapi_logs, tal que fa
 ## Puertos de cada servicio
 - 3100 loki
 - 3000 grafana
-- 8001 login
-- 8000 registro
+- 8001 registro
+- 8000 login
