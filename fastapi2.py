@@ -6,15 +6,14 @@ from fastapi.responses import HTMLResponse
 app = FastAPI()
 fake_users_db = {}
 
-# Configuración del logger
 logger = logging.getLogger("fastapi_logger")
 logger.setLevel(logging.INFO)
 
 log_path = "/fastapi_logs/fastapi2.log"
 handler = RotatingFileHandler(
     log_path,
-    maxBytes=5*1024*1024,  # 5 MB por archivo
-    backupCount=3           # Mantener 3 archivos de backup
+    maxBytes=5*1024*1024,  
+    backupCount=3           
 )
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 handler.setFormatter(formatter)
