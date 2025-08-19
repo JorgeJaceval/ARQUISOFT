@@ -1,0 +1,34 @@
+version: '3.7'
+services: 
+  loki: 
+    image: grafana/loki:latest
+    ports: 
+      - 3100:3100 
+    volumes:
+      - ./config/loki.yaml:/etc/loki/loki.yaml
+  promtail:
+    image: grafana/promtail:latest
+    volumes: 
+      - ./config/promtail.yaml:/etc/promtail/promtail.yaml
+      - ./fastapi_logs:/fastapi_logs
+    command: -config.file=/etc/promtail/promtail.yaml
+  grafana:  
+    image: grafana/grafana
+    ports: 
+    - 3001:3001
+  fastapi1:
+    build:
+      context: .
+      dockerfile: Dockerfile.1
+    ports:
+    - 8000:8000
+    volumes: 
+    - ./fastapi_logs:/fastapi_logs
+  fastapi2:
+    build:
+      context: .
+      dockerfile: Dockerfile.2
+    ports:
+    - 8001:8001
+    volumes: 
+    - ./fastapi_logs:/fastapi_logs
